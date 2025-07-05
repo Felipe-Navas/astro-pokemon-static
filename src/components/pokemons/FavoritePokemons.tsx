@@ -1,5 +1,6 @@
 import type { FavoritePokemon } from '@interfaces/favorite-pokemon'
 import { createSignal, For } from 'solid-js'
+import { FavoritePokemonCard } from './FavoritePokemonCard'
 
 const getLocalStoragePokemons = (): FavoritePokemon[] => {
   const favoritePokemons = JSON.parse(
@@ -11,13 +12,9 @@ const getLocalStoragePokemons = (): FavoritePokemon[] => {
 export const FavoritePokemons = () => {
   const [pokemons, setPokemons] = createSignal(getLocalStoragePokemons())
   return (
-    <div class="grid grid-cols-2 sm:grid-cols-4">
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-8">
       <For each={pokemons()}>
-        {(pokemon) => (
-          <div class="bg-blue-500 p-2 text-white rounded-md">
-            {pokemon.name}
-          </div>
-        )}
+        {(pokemon) => <FavoritePokemonCard pokemon={pokemon} />}
       </For>
     </div>
   )
